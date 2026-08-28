@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Package Delivery Robots — Work Allocation</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- intro.js for participant instructions -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/introjs.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/intro.min.js"></script>
+</head>
+<body>
+  <!-- Consent Form Landing Page -->
+  <div id="consent-overlay" class="overlay">
+    <div class="consent-card">
+      <h1>Participant Information</h1>
+      
+      <div class="consent-content">
+        <p class="consent-intro">
+          Welcome to the delegation study! Please carefully read the information below before you decide to participate in this study.
+        </p>
+
+        <div class="consent-section">
+          <h3>Project Summary</h3>
+          <p>The aim of this study is to examine how people make decisions when delegating work between themselves and automated systems in a warehouse task environment.</p>
+        </div>
+
+        <div class="consent-section">
+          <h3>Time Commitment</h3>
+          <p>The study typically takes 15 minutes to complete.</p>
+        </div>
+
+        <div class="consent-section">
+          <h3>Benefits & Risks</h3>
+          <p>There are no direct benefits from your participation in this study. There are no known risks associated with participation.</p>
+        </div>
+
+        <div class="consent-section">
+          <h3>Eligibility Requirements</h3>
+          <ul>
+            <li>You can participate only once in this study</li>
+            <li>United States citizen/resident</li>
+            <li>18 years or older</li>
+            <li>English speaker</li>
+          </ul>
+        </div>
+
+        <div class="consent-section">
+          <h3>Reimbursement & Compensation</h3>
+          <p>You will receive $2.00 US in return for your participation.</p>
+          <p class="consent-note"><strong>Note:</strong> If your answers are below a minimal threshold for quality, you will not be compensated.</p>
+        </div>
+
+        <div class="consent-section">
+          <h3>Confidentiality & Anonymity</h3>
+          <p>All research data collected will be stored securely and confidentially on a password protected server indefinitely. Identifying details will not be associated with any data provided by you as part of any publication or presentation.</p>
+        </div>
+
+        <div class="consent-checkbox-section">
+          <label class="consent-checkbox-label">
+            <input type="checkbox" id="consent-checkbox" class="consent-checkbox">
+            <span>I confirm that: I have read and understood the Participant Information Sheet, I am taking part in this research study voluntarily, I meet the eligibility requirements, and I am agreeing that my anonymised data may be shared in public repositories.</span>
+          </label>
+        </div>
+
+        <div class="consent-footer">
+          <button id="consent-agree" class="consent-btn" disabled>I Agree - Begin Study</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+    <main id="main">
+      <aside id="controls-col">
+        <div id="controls-inner">
+          <div id="round-counter" class="round-counter">Round 1/10</div>
+
+          <!-- Action Section with Agent Info -->
+          <section class="control-section action-theme" id="action-section">
+            <div class="agent-info" id="agent-info" style="display: none;">
+              <div class="agent-header">
+                <img src="" alt="" class="agent-icon" id="agent-icon" />
+                <div class="agent-name" id="agent-name"></div>
+              </div>
+              <div class="agent-description" id="agent-description"></div>
+            </div>
+            <div class="ctl-row-buttons action-buttons">
+              <button id="global-human-push" class="ctl-btn action-btn">Push</button>
+            </div>
+          </section>
+        </div>
+      </aside>
+
+      <section id="play-area">
+        <div id="field-wrap">
+          <div id="field-box">
+          </div>
+        </div>
+      </section>
+
+      <div id="alloc-overlay" class="overlay">
+        <div class="alloc-card light">
+          <h2>Make Your Choice</h2>
+          <div class="alloc-explain">Decide who will move the package.</div>
+          
+          <div class="alloc-block">
+            <!-- Radio button options will be generated dynamically by JavaScript -->
+            <div id="alloc-options" class="alloc-options">
+              <!-- Options will be inserted here -->
+            </div>
+          </div>
+          
+          <div class="alloc-foot">
+            <button id="alloc-continue" class="alloc-cta">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block Transition Overlay (between blocks) -->
+      <div id="block-transition-overlay" class="overlay hidden">
+        <div class="ready-card">
+          <h2 id="block-transition-title">🏭 New Factory</h2>
+          <p id="block-transition-text">
+            Welcome to a new factory! Your goal is to complete each round with as fast as possible.
+          </p>
+          <button id="block-transition-continue" class="rb-btn">Continue</button>
+        </div>
+      </div>
+
+      <!-- Block Survey Overlay (at the end of each block) -->
+      <div id="block-survey-overlay" class="overlay hidden">
+        <div class="feedback-card">
+          <h2>Quick Reflection</h2>
+          <p>Think back to the rounds you just completed in this block.</p>
+
+          <div class="feedback-section">
+            <label for="survey-robot-time" class="feedback-label">
+              How long do you think it took the robot to complete each round? (in seconds)
+            </label>
+            <input type="number" id="survey-robot-time" class="survey-input" min="0" max="50" step="1" maxlength="2" placeholder="0-50">
+          </div>
+          <div class="feedback-section">
+            <label for="survey-robot-clicks" class="feedback-label" style="margin-top:8px; font-weight:500; font-size:14px;">How many clicks do you think the robot required each round?</label>
+            <input type="number" id="survey-robot-clicks" class="survey-input" min="1" max="20" step="1" maxlength="2" placeholder="<20">
+          </div>
+          
+          <div class="feedback-section">
+            <label for="survey-human-time" class="feedback-label">
+              How long do you think it took you to complete each round yourself? (in seconds)
+            </label>
+            <input type="number" id="survey-human-time" class="survey-input" min="0" max="50" step="1" maxlength="2" placeholder="0-50">
+          </div>
+          <div class="feedback-section">
+            <label for="survey-human-clicks" class="feedback-label" style="margin-top:8px; font-weight:500; font-size:14px;">How many clicks does it take to do it yourself each round?</label>
+            <input type="number" id="survey-human-clicks" class="survey-input" min="1" max="20" step="1" maxlength="2" placeholder="<20">
+          </div>
+
+          <div class="feedback-foot">
+            <button id="block-survey-submit" class="rb-btn">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completion overlay -->
+      <div id="feedback-overlay" class="overlay hidden">
+        <div class="feedback-card">
+          <h2>Demo complete</h2>
+
+          <div class="feedback-foot">
+            <button id="feedback-submit" class="rb-btn">Restart Demo</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="round-banner" class="hidden">
+        <div id="round-banner-inner">
+          <div class="rb-title">✓ Round Complete!</div>
+          <div id="round-time" class="rb-sub"></div>
+          <button class="rb-btn" id="restart-btn">Next Round</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>
+
+

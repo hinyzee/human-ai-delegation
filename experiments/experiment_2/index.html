@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Baggage Screening Task</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== Consent Overlay ==================== -->
+  <div id="consent-overlay" class="overlay">
+    <div class="consent-card">
+      <h1>Participant Information</h1>
+      <div class="consent-content">
+        <p class="consent-intro">
+          Welcome to the baggage screening study! Please carefully read the information below before you decide to participate.
+        </p>
+        <div class="consent-section">
+          <h3>Project Summary</h3>
+          <p>The aim of this study is to examine how people make decisions when screening baggage for threats and how they collaborate with AI assistance systems.</p>
+        </div>
+        <div class="consent-section">
+          <h3>Time Commitment</h3>
+          <p>The study typically takes 10 to 15 minutes to complete.</p>
+        </div>
+        <div class="consent-section">
+          <h3>Benefits &amp; Risks</h3>
+          <p>There are no direct benefits from your participation in this study. There are no known risks associated with participation.</p>
+        </div>
+        <div class="consent-section">
+          <h3>Eligibility Requirements</h3>
+          <ul>
+            <li>You can participate only once in this study</li>
+            <li>United States citizen/resident</li>
+            <li>18 years or older</li>
+            <li>English speaker</li>
+          </ul>
+        </div>
+        <div class="consent-section">
+          <h3>Reimbursement &amp; Compensation</h3>
+          <p>You will receive $4.00 US in return for your participation.</p>
+          <p class="consent-note"><strong>Note:</strong> If your answers are below a minimal threshold for quality, you will not be compensated.</p>
+        </div>
+        <div class="consent-section">
+          <h3>Confidentiality &amp; Anonymity</h3>
+          <p>All research data collected will be stored securely and confidentially on a password protected server indefinitely. Identifying details will not be associated with any data provided by you as part of any publication or presentation.</p>
+        </div>
+        <div class="consent-checkbox-section">
+          <label class="consent-checkbox-label">
+            <input type="checkbox" id="consent-checkbox" class="consent-checkbox">
+            <span>I confirm that: I have read and understood the Participant Information Sheet, I am taking part in this research study voluntarily, I meet the eligibility requirements, and I am agreeing that my anonymised data may be shared in public repositories.</span>
+          </label>
+        </div>
+        <div class="consent-footer">
+          <button id="consent-agree" class="consent-btn" disabled>I Agree &mdash; Begin Study</button>
+          <div id="consent-status" class="consent-status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Instructions Overlay ==================== -->
+  <div id="instructions-overlay" class="overlay hidden">
+    <div class="instructions-card">
+      <div id="instructions-pages-container">
+        <!-- Instruction pages are built dynamically by showInstructions() -->
+      </div>
+      <div class="instructions-nav">
+        <button id="instructions-back" class="secondary-btn">Back</button>
+        <button id="instructions-next" class="primary-btn">Next</button>
+        <button id="instructions-start" class="primary-btn hidden">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Main App ==================== -->
+  <div id="app" class="hidden">
+    <main id="main">
+
+      <!-- Top bar -->
+      <header id="top-bar">
+        <div id="progress-bar" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="progress-fill" class="progress-fill"></div>
+          <span id="progress-label" class="progress-text">Image 1 of 30 | Batch 1 of 10</span>
+        </div>
+      </header>
+
+      <!-- ==================== Mode Choice Screen ==================== -->
+      <div id="choice-screen" class="screen hidden">
+        <div class="choice-card">
+          <h2 id="choice-batch-heading">New Batch</h2>
+          <p class="choice-subtitle" id="choice-subtitle">Choose how you want to complete this batch:</p>
+          <div class="choice-buttons">
+            <button id="btn-diy" class="choice-btn choice-btn-diy">
+              <span class="choice-btn-icon">&#128269;</span>
+              <span class="choice-btn-label">Manual Scan</span>
+            </button>
+            <button id="btn-ai" class="choice-btn choice-btn-ai">
+              <span class="choice-btn-icon">&#129302;</span>
+              <span class="choice-btn-label">AI Assisted Scan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== Manual (DIY) Screen ==================== -->
+      <div id="diy-screen" class="screen hidden">
+        <div class="diy-container">
+          <div class="screen-mode-copy manual-mode-copy">
+            <h2>
+              <span class="mode-badge mode-badge-manual">Manual Mode</span>
+              <span class="mode-title-text">You are inspecting the scans by yourself</span>
+            </h2>
+          </div>
+          <div class="diy-image-wrap" id="diy-image-wrap">
+            <img id="diy-image" src="" alt="X-ray scan" class="diy-image" />
+          </div>
+          <div class="diy-actions">
+            <button id="diy-threat-btn" class="action-btn action-btn-threat">Threat - Knife</button>
+            <button id="diy-safe-btn" class="action-btn action-btn-safe">Safe - No Knife</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== AI Processing Screen ==================== -->
+      <div id="ai-processing-screen" class="screen hidden">
+        <div class="processing-card">
+          <div class="spinner"></div>
+          <h2>AI is analyzing...</h2>
+        </div>
+      </div>
+
+      <!-- ==================== AI Mode Split Screen ==================== -->
+      <div id="ai-screen" class="screen hidden">
+        <div class="ai-split-layout">
+
+          <!-- Left Pane: Context Image -->
+          <div class="ai-left-pane">
+            <div class="screen-mode-copy ai-mode-copy">
+              <h2>
+                <span class="mode-badge mode-badge-ai">AI Assisted</span>
+                <span class="mode-title-text">AI flagged the following regions</span>
+              </h2>
+              <p>Hover over to check them further</p>
+            </div>
+            <div class="ai-image-wrap" id="ai-image-wrap">
+              <img id="ai-base-image" src="" alt="X-ray scan" class="ai-base-image" />
+              <!-- Bounding box overlays injected dynamically -->
+            </div>
+            <div class="diy-actions ai-actions">
+              <button id="ai-threat-btn" class="action-btn action-btn-threat">Threat - Knife</button>
+              <button id="ai-safe-btn" class="action-btn action-btn-safe">Safe - No Knife</button>
+            </div>
+          </div>
+
+          <!-- Right Pane: Anomaly Review Panel -->
+          <div class="ai-right-pane">
+            <h3 class="snippet-panel-title">Selected Region</h3>
+            <div id="snippet-panel" class="snippet-panel">
+              <!-- Snippet cards injected dynamically -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ==================== Block Transition ==================== -->
+      <div id="block-transition-overlay" class="overlay hidden">
+        <div class="transition-card">
+          <h2 id="block-transition-title">New Screening Station</h2>
+          <div id="block-transition-text">You have been assigned to a new screening station.</div>
+          <button id="block-transition-continue" class="primary-btn">Continue</button>
+        </div>
+      </div>
+
+      <!-- ==================== Block Survey ==================== -->
+      <div id="block-survey-overlay" class="overlay hidden">
+        <div class="survey-card" id="survey-card">
+          <!-- Survey content built dynamically by runBlockSurvey -->
+        </div>
+      </div>
+
+      <!-- ==================== Study Complete ==================== -->
+      <div id="feedback-overlay" class="overlay hidden">
+        <div class="end-card">
+          <h2>Study Complete</h2>
+          <p>Thank you for participating.</p>
+          <div class="end-foot">
+            <button id="feedback-submit" class="primary-btn">Restart Demo</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="./config.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

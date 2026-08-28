@@ -1,0 +1,1141 @@
+{
+  "target_present": [
+    "xray_hard00861",
+    "xray_hard00856",
+    "xray_hard00398",
+    "xray_hard01841",
+    "xray_hard00388",
+    "xray_hard00375",
+    "xray_hard02090",
+    "xray_hard00859",
+    "xray_hard01148",
+    "xray_hard00395",
+    "xray_hard00751",
+    "xray_hard01151",
+    "xray_hard00391",
+    "xray_hard00843",
+    "xray_hard02308",
+    "xray_hard02224",
+    "xray_hard02217",
+    "xray_hard00864",
+    "xray_hard02257",
+    "xray_hard01141",
+    "xray_hard02089",
+    "xray_hard00768",
+    "xray_hard00838",
+    "xray_hard00392",
+    "xray_hard02228",
+    "xray_hard00384",
+    "xray_hard01159",
+    "xray_hard00841",
+    "xray_hard02271",
+    "xray_hard00394",
+    "xray_hard00860",
+    "xray_hard00865"
+  ],
+  "target_absent": [
+    "xray_hard03692",
+    "xray_hard01012",
+    "xray_hard00477",
+    "xray_hard01333",
+    "xray_hard00471",
+    "xray_hard00505",
+    "xray_hard00503",
+    "xray_hard01368",
+    "xray_hard01688",
+    "xray_hard00618",
+    "xray_hard01009",
+    "xray_hard01013",
+    "xray_hard01371",
+    "xray_hard00673",
+    "xray_hard00234",
+    "xray_hard00474",
+    "xray_hard00480",
+    "xray_hard01028",
+    "xray_hard00487",
+    "xray_hard03178",
+    "xray_hard00654",
+    "xray_hard00374",
+    "xray_hard00627",
+    "xray_hard01354",
+    "xray_hard00624",
+    "xray_hard00504",
+    "xray_hard01160",
+    "xray_hard00238",
+    "xray_hard01356",
+    "xray_hard01370",
+    "xray_hard00672",
+    "xray_hard01430"
+  ],
+  "config": {
+    "annotation_file": "annotations/test_hard.json",
+    "image_dir": "test",
+    "seed": 42,
+    "target_present_count": 32,
+    "target_absent_count": 32,
+    "num_lures_per_image": 10,
+    "absent_shortlist_size": 200,
+    "add_on_target_present_count": 2,
+    "add_on_target_absent_count": 2,
+    "source_manifest": "stimuli_2/folder_manifest.json",
+    "add_on_dir": "add_on"
+  },
+  "selection_summary": {
+    "target_present": {
+      "eligible_candidates": 147,
+      "skipped": {
+        "missing_image": 0,
+        "not_exactly_one_knife": 9329,
+        "failed_filter": 270
+      },
+      "used_existing_manifest": false
+    },
+    "target_absent": {
+      "annotation_candidates": 3114,
+      "shortlisted_for_pixel_scoring": 200,
+      "eligible_after_pixel_scoring": 147,
+      "skipped": {
+        "missing_image": 0,
+        "contains_knife": 619,
+        "no_other_annotations": 6013,
+        "failed_filter_after_pixel_score": 53
+      }
+    },
+    "source_stimuli_2": {
+      "target_present": {
+        "eligible_candidates": 147,
+        "skipped": {
+          "missing_image": 0,
+          "not_exactly_one_knife": 9329,
+          "failed_filter": 270
+        },
+        "used_existing_manifest": false
+      },
+      "target_absent": {
+        "annotation_candidates": 3114,
+        "shortlisted_for_pixel_scoring": 200,
+        "eligible_after_pixel_scoring": 147,
+        "skipped": {
+          "missing_image": 0,
+          "contains_knife": 619,
+          "no_other_annotations": 6013,
+          "failed_filter_after_pixel_score": 53
+        }
+      },
+      "export_skips": {
+        "target_present": [],
+        "target_absent": []
+      }
+    },
+    "add_on": {
+      "target_present": [
+        "xray_hard00860",
+        "xray_hard00865"
+      ],
+      "target_absent": [
+        "xray_hard00672",
+        "xray_hard01430"
+      ]
+    }
+  },
+  "target_present_rows": [
+    {
+      "rank": 1,
+      "file_name": "xray_hard00861.png",
+      "selection_score": 12.8938,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.8761,
+        "min_center_distance_norm": 0.0598,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.785,
+        "knife_active_fraction": 0.9931,
+        "global_active_fraction": 0.3099,
+        "knife_area_fraction": 0.024
+      }
+    },
+    {
+      "rank": 2,
+      "file_name": "xray_hard00856.png",
+      "selection_score": 12.7579,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.6582,
+        "min_center_distance_norm": 0.0868,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.7884,
+        "knife_active_fraction": 0.9436,
+        "global_active_fraction": 0.2703,
+        "knife_area_fraction": 0.0159
+      }
+    },
+    {
+      "rank": 3,
+      "file_name": "xray_hard00398.png",
+      "selection_score": 12.1334,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.4993,
+        "min_center_distance_norm": 0.0013,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.5789,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.2553,
+        "knife_area_fraction": 0.0219
+      }
+    },
+    {
+      "rank": 4,
+      "file_name": "xray_hard01841.png",
+      "selection_score": 11.5282,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.6289,
+        "min_center_distance_norm": 0.0634,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6422,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.3766,
+        "knife_area_fraction": 0.0235
+      }
+    },
+    {
+      "rank": 5,
+      "file_name": "xray_hard00388.png",
+      "selection_score": 11.3516,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.8004,
+        "min_center_distance_norm": 0.0994,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6266,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.2491,
+        "knife_area_fraction": 0.0253
+      }
+    },
+    {
+      "rank": 6,
+      "file_name": "xray_hard00375.png",
+      "selection_score": 11.1206,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.8561,
+        "min_center_distance_norm": 0.0734,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6039,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.3263,
+        "knife_area_fraction": 0.0349
+      }
+    },
+    {
+      "rank": 7,
+      "file_name": "xray_hard02090.png",
+      "selection_score": 10.566,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.3198,
+        "min_center_distance_norm": 0.0289,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.482,
+        "knife_active_fraction": 0.8526,
+        "global_active_fraction": 0.2609,
+        "knife_area_fraction": 0.0397
+      }
+    },
+    {
+      "rank": 8,
+      "file_name": "xray_hard00859.png",
+      "selection_score": 10.3498,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.8255,
+        "min_center_distance_norm": 0.0294,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.5289,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.2723,
+        "knife_area_fraction": 0.0355
+      }
+    },
+    {
+      "rank": 9,
+      "file_name": "xray_hard01148.png",
+      "selection_score": 10.295,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 0.8247,
+        "min_center_distance_norm": 0.0991,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6663,
+        "knife_active_fraction": 0.8656,
+        "global_active_fraction": 0.3462,
+        "knife_area_fraction": 0.0288
+      }
+    },
+    {
+      "rank": 10,
+      "file_name": "xray_hard00395.png",
+      "selection_score": 10.1657,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.3805,
+        "min_center_distance_norm": 0.0082,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.4209,
+        "knife_active_fraction": 0.7189,
+        "global_active_fraction": 0.1775,
+        "knife_area_fraction": 0.0342
+      }
+    },
+    {
+      "rank": 11,
+      "file_name": "xray_hard00751.png",
+      "selection_score": 10.1454,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.5968,
+        "min_center_distance_norm": 0.0947,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.5021,
+        "knife_active_fraction": 0.9671,
+        "global_active_fraction": 0.2092,
+        "knife_area_fraction": 0.0195
+      }
+    },
+    {
+      "rank": 12,
+      "file_name": "xray_hard01151.png",
+      "selection_score": 10.1142,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.2162,
+        "min_center_distance_norm": 0.0423,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.4291,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.2534,
+        "knife_area_fraction": 0.035
+      }
+    },
+    {
+      "rank": 13,
+      "file_name": "xray_hard00391.png",
+      "selection_score": 10.0929,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.1644,
+        "min_center_distance_norm": 0.0628,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.5999,
+        "knife_active_fraction": 0.9974,
+        "global_active_fraction": 0.2657,
+        "knife_area_fraction": 0.0295
+      }
+    },
+    {
+      "rank": 14,
+      "file_name": "xray_hard00843.png",
+      "selection_score": 10.07,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.4835,
+        "min_center_distance_norm": 0.0367,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.3478,
+        "knife_active_fraction": 0.9858,
+        "global_active_fraction": 0.1353,
+        "knife_area_fraction": 0.0203
+      }
+    },
+    {
+      "rank": 15,
+      "file_name": "xray_hard02308.png",
+      "selection_score": 9.801,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 1.2467,
+        "min_center_distance_norm": 0.0436,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6636,
+        "knife_active_fraction": 0.9401,
+        "global_active_fraction": 0.2263,
+        "knife_area_fraction": 0.0144
+      }
+    },
+    {
+      "rank": 16,
+      "file_name": "xray_hard02224.png",
+      "selection_score": 9.7702,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 1.445,
+        "min_center_distance_norm": 0.0764,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.7252,
+        "knife_active_fraction": 0.9995,
+        "global_active_fraction": 0.45,
+        "knife_area_fraction": 0.0566
+      }
+    },
+    {
+      "rank": 17,
+      "file_name": "xray_hard02217.png",
+      "selection_score": 9.7653,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 1.1174,
+        "min_center_distance_norm": 0.0328,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6935,
+        "knife_active_fraction": 0.9316,
+        "global_active_fraction": 0.4839,
+        "knife_area_fraction": 0.0342
+      }
+    },
+    {
+      "rank": 18,
+      "file_name": "xray_hard00864.png",
+      "selection_score": 9.6419,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.5104,
+        "min_center_distance_norm": 0.0363,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.3348,
+        "knife_active_fraction": 0.8126,
+        "global_active_fraction": 0.1136,
+        "knife_area_fraction": 0.031
+      }
+    },
+    {
+      "rank": 19,
+      "file_name": "xray_hard02257.png",
+      "selection_score": 9.6326,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 1.4889,
+        "min_center_distance_norm": 0.0435,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6557,
+        "knife_active_fraction": 0.992,
+        "global_active_fraction": 0.3064,
+        "knife_area_fraction": 0.0353
+      }
+    },
+    {
+      "rank": 20,
+      "file_name": "xray_hard01141.png",
+      "selection_score": 9.5981,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 0.8575,
+        "min_center_distance_norm": 0.054,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.6973,
+        "knife_active_fraction": 0.9746,
+        "global_active_fraction": 0.2425,
+        "knife_area_fraction": 0.0117
+      }
+    },
+    {
+      "rank": 21,
+      "file_name": "xray_hard02089.png",
+      "selection_score": 9.552,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.927,
+        "min_center_distance_norm": 0.0879,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.4561,
+        "knife_active_fraction": 0.8884,
+        "global_active_fraction": 0.2633,
+        "knife_area_fraction": 0.0471
+      }
+    },
+    {
+      "rank": 22,
+      "file_name": "xray_hard00768.png",
+      "selection_score": 9.4094,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 2,
+        "proximity_strength": 1.9008,
+        "min_center_distance_norm": 0.0309,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.381,
+        "knife_active_fraction": 0.8544,
+        "global_active_fraction": 0.2672,
+        "knife_area_fraction": 0.0191
+      }
+    },
+    {
+      "rank": 23,
+      "file_name": "xray_hard00838.png",
+      "selection_score": 9.3976,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.0039,
+        "min_center_distance_norm": 0.0304,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.3394,
+        "knife_active_fraction": 0.8972,
+        "global_active_fraction": 0.2119,
+        "knife_area_fraction": 0.0216
+      }
+    },
+    {
+      "rank": 24,
+      "file_name": "xray_hard00392.png",
+      "selection_score": 9.3921,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.8214,
+        "min_center_distance_norm": 0.0666,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.4179,
+        "knife_active_fraction": 0.745,
+        "global_active_fraction": 0.2182,
+        "knife_area_fraction": 0.034
+      }
+    },
+    {
+      "rank": 25,
+      "file_name": "xray_hard02228.png",
+      "selection_score": 9.3146,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 0.9014,
+        "min_center_distance_norm": 0.0613,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.665,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.221,
+        "knife_area_fraction": 0.0133
+      }
+    },
+    {
+      "rank": 26,
+      "file_name": "xray_hard00384.png",
+      "selection_score": 9.2344,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.1657,
+        "min_center_distance_norm": 0.041,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.4237,
+        "knife_active_fraction": 0.8709,
+        "global_active_fraction": 0.2492,
+        "knife_area_fraction": 0.0601
+      }
+    },
+    {
+      "rank": 27,
+      "file_name": "xray_hard01159.png",
+      "selection_score": 9.0099,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.1082,
+        "min_center_distance_norm": 0.022,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.3681,
+        "knife_active_fraction": 0.999,
+        "global_active_fraction": 0.2445,
+        "knife_area_fraction": 0.0495
+      }
+    },
+    {
+      "rank": 28,
+      "file_name": "xray_hard00841.png",
+      "selection_score": 8.9938,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.3189,
+        "min_center_distance_norm": 0.0345,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.2856,
+        "knife_active_fraction": 0.8188,
+        "global_active_fraction": 0.1174,
+        "knife_area_fraction": 0.0301
+      }
+    },
+    {
+      "rank": 29,
+      "file_name": "xray_hard02271.png",
+      "selection_score": 8.9669,
+      "selection_metrics": {
+        "other_object_count": 2,
+        "nearby_object_count": 2,
+        "context_object_count": 2,
+        "proximity_strength": 1.6491,
+        "min_center_distance_norm": 0.0316,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.5362,
+        "knife_active_fraction": 1.0,
+        "global_active_fraction": 0.3031,
+        "knife_area_fraction": 0.0334
+      }
+    },
+    {
+      "rank": 30,
+      "file_name": "xray_hard00394.png",
+      "selection_score": 8.9646,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.0664,
+        "min_center_distance_norm": 0.0248,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.3327,
+        "knife_active_fraction": 0.9677,
+        "global_active_fraction": 0.2266,
+        "knife_area_fraction": 0.0383
+      }
+    },
+    {
+      "rank": 31,
+      "file_name": "xray_hard00860.png",
+      "selection_score": 8.9474,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 1.8814,
+        "min_center_distance_norm": 0.0423,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.3712,
+        "knife_active_fraction": 0.9024,
+        "global_active_fraction": 0.2263,
+        "knife_area_fraction": 0.0399
+      }
+    },
+    {
+      "rank": 32,
+      "file_name": "xray_hard00865.png",
+      "selection_score": 8.9122,
+      "selection_metrics": {
+        "other_object_count": 3,
+        "nearby_object_count": 3,
+        "context_object_count": 3,
+        "proximity_strength": 2.0433,
+        "min_center_distance_norm": 0.0155,
+        "min_gap_norm": 0.0,
+        "local_active_fraction": 0.35,
+        "knife_active_fraction": 0.7958,
+        "global_active_fraction": 0.1417,
+        "knife_area_fraction": 0.0379
+      }
+    }
+  ],
+  "target_absent_rows": [
+    {
+      "rank": 1,
+      "file_name": "xray_hard03692.png",
+      "selection_score": 36.6412,
+      "selection_metrics": {
+        "object_count": 7,
+        "nearby_pair_count": 19,
+        "touch_pair_count": 8,
+        "proximity_strength": 7.8706,
+        "dominant_object_area_fraction": 0.0766,
+        "annotated_bbox_active_fraction": 0.8704,
+        "global_active_fraction": 0.3499
+      }
+    },
+    {
+      "rank": 2,
+      "file_name": "xray_hard01012.png",
+      "selection_score": 20.9935,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 4.3998,
+        "dominant_object_area_fraction": 0.0774,
+        "annotated_bbox_active_fraction": 0.9026,
+        "global_active_fraction": 0.2874
+      }
+    },
+    {
+      "rank": 3,
+      "file_name": "xray_hard00477.png",
+      "selection_score": 19.7568,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.9934,
+        "dominant_object_area_fraction": 0.1166,
+        "annotated_bbox_active_fraction": 0.8315,
+        "global_active_fraction": 0.3725
+      }
+    },
+    {
+      "rank": 4,
+      "file_name": "xray_hard01333.png",
+      "selection_score": 19.6681,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 4.0861,
+        "dominant_object_area_fraction": 0.0951,
+        "annotated_bbox_active_fraction": 0.7808,
+        "global_active_fraction": 0.1874
+      }
+    },
+    {
+      "rank": 5,
+      "file_name": "xray_hard00471.png",
+      "selection_score": 19.6237,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.112,
+        "dominant_object_area_fraction": 0.0735,
+        "annotated_bbox_active_fraction": 0.8458,
+        "global_active_fraction": 0.3061
+      }
+    },
+    {
+      "rank": 6,
+      "file_name": "xray_hard00505.png",
+      "selection_score": 19.5441,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 4.453,
+        "dominant_object_area_fraction": 0.1913,
+        "annotated_bbox_active_fraction": 0.9378,
+        "global_active_fraction": 0.4909
+      }
+    },
+    {
+      "rank": 7,
+      "file_name": "xray_hard00503.png",
+      "selection_score": 19.1326,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.6563,
+        "dominant_object_area_fraction": 0.1175,
+        "annotated_bbox_active_fraction": 0.8385,
+        "global_active_fraction": 0.2808
+      }
+    },
+    {
+      "rank": 8,
+      "file_name": "xray_hard01368.png",
+      "selection_score": 18.7972,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.9518,
+        "dominant_object_area_fraction": 0.151,
+        "annotated_bbox_active_fraction": 0.8533,
+        "global_active_fraction": 0.2817
+      }
+    },
+    {
+      "rank": 9,
+      "file_name": "xray_hard01688.png",
+      "selection_score": 18.6613,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 3.6489,
+        "dominant_object_area_fraction": 0.1206,
+        "annotated_bbox_active_fraction": 0.8733,
+        "global_active_fraction": 0.3262
+      }
+    },
+    {
+      "rank": 10,
+      "file_name": "xray_hard00618.png",
+      "selection_score": 18.6495,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 4.287,
+        "dominant_object_area_fraction": 0.1216,
+        "annotated_bbox_active_fraction": 0.7723,
+        "global_active_fraction": 0.2906
+      }
+    },
+    {
+      "rank": 11,
+      "file_name": "xray_hard01009.png",
+      "selection_score": 18.3765,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 3.2739,
+        "dominant_object_area_fraction": 0.0953,
+        "annotated_bbox_active_fraction": 0.833,
+        "global_active_fraction": 0.2779
+      }
+    },
+    {
+      "rank": 12,
+      "file_name": "xray_hard01013.png",
+      "selection_score": 18.3578,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 3.1489,
+        "dominant_object_area_fraction": 0.1329,
+        "annotated_bbox_active_fraction": 0.9434,
+        "global_active_fraction": 0.404
+      }
+    },
+    {
+      "rank": 13,
+      "file_name": "xray_hard01371.png",
+      "selection_score": 18.2917,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.7755,
+        "dominant_object_area_fraction": 0.1493,
+        "annotated_bbox_active_fraction": 0.8075,
+        "global_active_fraction": 0.3139
+      }
+    },
+    {
+      "rank": 14,
+      "file_name": "xray_hard00673.png",
+      "selection_score": 18.2789,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 4,
+        "proximity_strength": 3.2282,
+        "dominant_object_area_fraction": 0.0864,
+        "annotated_bbox_active_fraction": 0.8715,
+        "global_active_fraction": 0.3672
+      }
+    },
+    {
+      "rank": 15,
+      "file_name": "xray_hard00234.png",
+      "selection_score": 18.1531,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 4.0324,
+        "dominant_object_area_fraction": 0.1962,
+        "annotated_bbox_active_fraction": 0.8678,
+        "global_active_fraction": 0.4337
+      }
+    },
+    {
+      "rank": 16,
+      "file_name": "xray_hard00474.png",
+      "selection_score": 17.9464,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 4.2416,
+        "dominant_object_area_fraction": 0.217,
+        "annotated_bbox_active_fraction": 0.9595,
+        "global_active_fraction": 0.4621
+      }
+    },
+    {
+      "rank": 17,
+      "file_name": "xray_hard00480.png",
+      "selection_score": 17.9044,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 3.6438,
+        "dominant_object_area_fraction": 0.1021,
+        "annotated_bbox_active_fraction": 0.7123,
+        "global_active_fraction": 0.3554
+      }
+    },
+    {
+      "rank": 18,
+      "file_name": "xray_hard01028.png",
+      "selection_score": 17.9029,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 4.2115,
+        "dominant_object_area_fraction": 0.1143,
+        "annotated_bbox_active_fraction": 0.6075,
+        "global_active_fraction": 0.1597
+      }
+    },
+    {
+      "rank": 19,
+      "file_name": "xray_hard00487.png",
+      "selection_score": 17.8308,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 2.6415,
+        "dominant_object_area_fraction": 0.1255,
+        "annotated_bbox_active_fraction": 0.8524,
+        "global_active_fraction": 0.389
+      }
+    },
+    {
+      "rank": 20,
+      "file_name": "xray_hard03178.png",
+      "selection_score": 17.6819,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 3.6253,
+        "dominant_object_area_fraction": 0.1003,
+        "annotated_bbox_active_fraction": 0.7253,
+        "global_active_fraction": 0.1809
+      }
+    },
+    {
+      "rank": 21,
+      "file_name": "xray_hard00654.png",
+      "selection_score": 17.6682,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 4,
+        "proximity_strength": 3.2982,
+        "dominant_object_area_fraction": 0.115,
+        "annotated_bbox_active_fraction": 0.8825,
+        "global_active_fraction": 0.3407
+      }
+    },
+    {
+      "rank": 22,
+      "file_name": "xray_hard00374.png",
+      "selection_score": 17.6519,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 4,
+        "proximity_strength": 3.7403,
+        "dominant_object_area_fraction": 0.0985,
+        "annotated_bbox_active_fraction": 0.7692,
+        "global_active_fraction": 0.2619
+      }
+    },
+    {
+      "rank": 23,
+      "file_name": "xray_hard00627.png",
+      "selection_score": 17.575,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.9816,
+        "dominant_object_area_fraction": 0.0886,
+        "annotated_bbox_active_fraction": 0.5259,
+        "global_active_fraction": 0.1482
+      }
+    },
+    {
+      "rank": 24,
+      "file_name": "xray_hard01354.png",
+      "selection_score": 17.5654,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 5,
+        "touch_pair_count": 5,
+        "proximity_strength": 2.7988,
+        "dominant_object_area_fraction": 0.1037,
+        "annotated_bbox_active_fraction": 0.8867,
+        "global_active_fraction": 0.3753
+      }
+    },
+    {
+      "rank": 25,
+      "file_name": "xray_hard00624.png",
+      "selection_score": 17.5331,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 4.3474,
+        "dominant_object_area_fraction": 0.1543,
+        "annotated_bbox_active_fraction": 0.6588,
+        "global_active_fraction": 0.1944
+      }
+    },
+    {
+      "rank": 26,
+      "file_name": "xray_hard00504.png",
+      "selection_score": 17.5117,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.6257,
+        "dominant_object_area_fraction": 0.0968,
+        "annotated_bbox_active_fraction": 0.5954,
+        "global_active_fraction": 0.1952
+      }
+    },
+    {
+      "rank": 27,
+      "file_name": "xray_hard01160.png",
+      "selection_score": 17.4859,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.1478,
+        "dominant_object_area_fraction": 0.1481,
+        "annotated_bbox_active_fraction": 0.798,
+        "global_active_fraction": 0.3724
+      }
+    },
+    {
+      "rank": 28,
+      "file_name": "xray_hard00238.png",
+      "selection_score": 17.402,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 3,
+        "proximity_strength": 2.3553,
+        "dominant_object_area_fraction": 0.0523,
+        "annotated_bbox_active_fraction": 0.8979,
+        "global_active_fraction": 0.3652
+      }
+    },
+    {
+      "rank": 29,
+      "file_name": "xray_hard01356.png",
+      "selection_score": 17.2743,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 2,
+        "proximity_strength": 3.1017,
+        "dominant_object_area_fraction": 0.0606,
+        "annotated_bbox_active_fraction": 0.8908,
+        "global_active_fraction": 0.2904
+      }
+    },
+    {
+      "rank": 30,
+      "file_name": "xray_hard01370.png",
+      "selection_score": 17.2417,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 5,
+        "proximity_strength": 3.6683,
+        "dominant_object_area_fraction": 0.0888,
+        "annotated_bbox_active_fraction": 0.6279,
+        "global_active_fraction": 0.171
+      }
+    },
+    {
+      "rank": 31,
+      "file_name": "xray_hard00672.png",
+      "selection_score": 17.0919,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 3,
+        "proximity_strength": 2.0262,
+        "dominant_object_area_fraction": 0.0624,
+        "annotated_bbox_active_fraction": 0.9381,
+        "global_active_fraction": 0.4118
+      }
+    },
+    {
+      "rank": 32,
+      "file_name": "xray_hard01430.png",
+      "selection_score": 17.0474,
+      "selection_metrics": {
+        "object_count": 4,
+        "nearby_pair_count": 6,
+        "touch_pair_count": 6,
+        "proximity_strength": 3.8856,
+        "dominant_object_area_fraction": 0.1531,
+        "annotated_bbox_active_fraction": 0.6643,
+        "global_active_fraction": 0.2369
+      }
+    }
+  ],
+  "source_roots": {
+    "stimuli_2": "stimuli_2",
+    "add_on": "add_on"
+  }
+}
