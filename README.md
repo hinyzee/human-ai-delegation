@@ -1,91 +1,74 @@
-# Delegation study publication repository
+# Human–AI Delegation
 
-This repository contains the experiment demos, cleaned analysis data, final models, and the three figures reported in the paper. The demos preserve the task flow but contain no Firebase connection, API credentials, participant redirect, browser storage, or data export. Open-response questions are excluded.
+Code, data, and experimental materials for **“Deciding Whether to Delegate to AI: Time, Effort, and Repeated Experience.”**
 
-## Structure
+This project examines how people decide whether to complete work themselves or delegate it to an automated agent. Across two behavioral experiments, we manipulate the time and effort associated with the two options and examine how delegation choices change with experience. The repository contains the browser experiments, cleaned analysis data, Bayesian models, posterior draws, and code used to generate the paper figures.
+
+## Experiments
+
+**Experiment 1: Package delivery.** Participants repeatedly chose whether to move a package themselves or delegate it to a robot. Separate time and effort versions isolate how the relative completion time and required work of the two options affect delegation.
+
+**Experiment 2: Baggage screening.** Participants repeatedly chose between manually screening baggage X-rays and using AI assistance. The AI-assisted option varied in processing time and required review effort.
+
+The browser experiments can be run locally for demonstration, but the original data-collection backend is not included.
+
+## Repository structure
 
 ```text
-experiments/
-  experiment_1/
-    time_manipulation/
-    effort_manipulation/
-  experiment_2/
-data/
-  experiment_1/
-  experiment_2/
-analysis/
-  modeling/
-    model_specifications.R
-    experiment_1_model.R
-    experiment_2_model.R
-    experiment_2_appendix.R
-    results/
-  figures/
-    paper_figures.py
-    figure_1_preference_shift.{png,pdf}
-    figure_2_delegation_trajectories.{png,pdf}
-    figure_3_latent_belief_trajectories.{png,pdf}
-requirements.txt
-renv.lock
+human-ai-delegation/
+├── experiments/
+│   ├── experiment_1/
+│   │   ├── effort/
+│   │   └── time/
+│   └── experiment_2/
+│       └── stimuli/
+├── data/
+│   ├── experiment_1/
+│   │   ├── effort_trials.csv
+│   │   └── time_trials.csv
+│   └── experiment_2/
+│       └── batches.csv
+├── analysis/
+│   ├── models/
+│   ├── results/
+│   │   ├── experiment_1/
+│   │   └── experiment_2/
+│   └── figures/
+│       ├── paper_figures.py
+│       └── output/
+├── .gitignore
+├── requirements.txt
+└── renv.lock
 ```
 
-The paper figure mapping is:
+## Data and models
 
-- Figure 1: original `fig00`
-- Figure 2: original `fig03`
-- Figure 3: original `fig13`
+`data/` contains the cleaned, analysis-ready datasets used in the paper. Raw browser event logs are not included. Experiment 1 data are organized at the trial level, and Experiment 2 data are organized at the batch level.
 
-## Data
+The R and JAGS models are in `analysis/models/`:
 
-`data/experiment_1` contains cleaned trial-level files for the time and effort manipulations. `data/experiment_2` contains cleaned batch-level reward-rate data and the condition-level trajectory summary. Participant identifiers are study-specific anonymous IDs; no free-text or recruitment-platform fields are included.
+- `experiment_1_model.R` models delegation in the package-delivery experiment.
+- `experiment_2_model.R` models delegation in the baggage-screening experiment using experienced reward rate.
+- `experiment_2_appendix.R` compares alternative specifications based on accuracy, time, effort, and reward rate.
+- `model_specifications.R` contains the shared JAGS model definitions and fitting helper.
 
-## Setup
+Compressed choice and belief trajectory draws are included under `analysis/results/`. They allow the figures to be reproduced without refitting the models.
 
-Python 3.12 and R 4.4.2 were used. Install the Python environment with:
+## Reproducing the analyses
+
+The R environment is recorded in `renv.lock`. Restore it in R, ensure JAGS is installed, and run:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+Rscript analysis/models/experiment_1_model.R
+Rscript analysis/models/experiment_2_model.R
+Rscript analysis/models/experiment_2_appendix.R  # optional supplementary comparison
 ```
 
-The models require JAGS 4.3.2. Install JAGS with `brew install jags` on macOS or `sudo apt install jags` on Ubuntu. Restore the R packages with:
-
-```r
-install.packages("renv")
-renv::restore()
-```
-
-A Dockerfile is not needed for this repository. `requirements.txt` covers Python packages, `renv.lock` covers R packages, and JAGS remains a system dependency.
-
-## Run the analysis
-
-From the repository root:
+To generate the paper figures from the cleaned data and included posterior draws:
 
 ```bash
-Rscript analysis/modeling/experiment_1_model.R
-Rscript analysis/modeling/experiment_2_model.R
+python -m pip install -r requirements.txt
 python analysis/figures/paper_figures.py
 ```
 
-The appendix comparison is computationally expensive and runs separately:
-
-```bash
-Rscript analysis/modeling/experiment_2_appendix.R
-```
-
-The final posterior summaries needed by Figures 2 and 3 are retained in `analysis/modeling/results`. Full fitted model objects are generated locally and excluded from version control.
-
-## Run the demos
-
-Serve the repository locally because Experiment 2 loads stimulus metadata with relative requests:
-
-```bash
-python -m http.server 8000
-```
-
-Then open:
-
-- `http://localhost:8000/experiments/experiment_1/time_manipulation/`
-- `http://localhost:8000/experiments/experiment_1/effort_manipulation/`
-- `http://localhost:8000/experiments/experiment_2/`
+Generated PNG and PDF files are written to `analysis/figures/output/`.

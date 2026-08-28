@@ -287,7 +287,7 @@ async function markExperimentImageCountsCompleted() {
 
 async function createExperimentAssignment() {
   const cells = buildExperimentCells();
-  const forcedCondition = CONFIG.experimentConditionOverride;
+  const forcedCondition = CONFIG.DEBUG_MODE ? CONFIG.debugForceCondition : null;
   const forcedCellIndex = forcedCondition && CONFIG.conditions[forcedCondition]
     ? cells.findIndex(cell => cell.blockOrder[0] === forcedCondition)
     : -1;
@@ -300,7 +300,7 @@ async function createExperimentAssignment() {
         CONFIG.demoName, 'experimentCell', cells.length, 60
       );
     } catch (error) {
-      console.warn('[Experiment] Demo-balanced assignment failed; using deterministic fallback.', error);
+      console.warn('[Experiment] Condition assignment failed; using deterministic fallback.', error);
     }
   }
 
@@ -324,8 +324,8 @@ async function createExperimentAssignment() {
     imageCounterPath: getImageCountsPath(),
     forcedConditionOverride: forcedCellIndex >= 0 ? forcedCondition : null,
     selectionStrategy: forcedCellIndex >= 0
-      ? `config override experimentConditionOverride=${forcedCondition}; button order randomized independently; images balanced per block condition`
-      : 'demo balanced assignment across ordered condition pairs; button order randomized independently; images balanced per block condition',
+      ? `debug condition override=${forcedCondition}; button order randomized independently; images balanced per block condition`
+      : 'demo random assignment across ordered condition pairs; button order randomized independently; images balanced per block condition',
     blocks,
   };
 

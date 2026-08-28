@@ -8,12 +8,12 @@ args <- commandArgs(trailingOnly = FALSE)
 script <- normalizePath(sub("--file=", "", args[grep("--file=", args)]))
 model_dir <- dirname(script)
 repo <- normalizePath(file.path(model_dir, "..", ".."))
-out <- file.path(model_dir, "results", "experiment_1")
+out <- file.path(repo, "analysis", "results", "experiment_1")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 source(file.path(model_dir, "model_specifications.R"))
 
-time_trials <- read.csv(file.path(repo, "data", "experiment_1", "experiment_1_time_manipulation_trials.csv"))
-effort_trials <- read.csv(file.path(repo, "data", "experiment_1", "experiment_1_effort_manipulation_trials.csv"))
+time_trials <- read.csv(file.path(repo, "data", "experiment_1", "time_trials.csv"))
+effort_trials <- read.csv(file.path(repo, "data", "experiment_1", "effort_trials.csv"))
 
 make_matrix <- function(data, value) {
   data %>%
@@ -153,5 +153,5 @@ belief_states <- bind_rows(
     .before = 1
   )
 
-write.csv(trajectory, gzfile(file.path(out, "factory_trajectory_draws.csv.gz")), row.names = FALSE)
-write.csv(belief_states, gzfile(file.path(out, "factory_belief_state_draws.csv.gz")), row.names = FALSE)
+write.csv(trajectory, gzfile(file.path(out, "choice_trajectories.csv.gz")), row.names = FALSE)
+write.csv(belief_states, gzfile(file.path(out, "belief_trajectories.csv.gz")), row.names = FALSE)

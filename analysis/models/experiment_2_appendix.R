@@ -7,11 +7,11 @@ args <- commandArgs(trailingOnly = FALSE)
 script <- normalizePath(sub("--file=", "", args[grep("--file=", args)]))
 model_dir <- dirname(script)
 repo <- normalizePath(file.path(model_dir, "..", ".."))
-out <- file.path(model_dir, "results", "experiment_2")
+out <- file.path(repo, "analysis", "results", "experiment_2")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 source(file.path(model_dir, "model_specifications.R"))
 
-data <- read.csv(file.path(repo, "data", "experiment_2", "experiment_2_reward_rate_batches.csv")) %>%
+data <- read.csv(file.path(repo, "data", "experiment_2", "batches.csv")) %>%
   mutate(
     t = as.integer(t),
     y = as.integer(y),

@@ -9,8 +9,9 @@ from scipy.stats import beta, t
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "data"
-RESULTS = ROOT / "analysis" / "modeling" / "results"
-OUT = Path(__file__).resolve().parent
+RESULTS = ROOT / "analysis" / "results"
+OUT = Path(__file__).resolve().parent / "output"
+OUT.mkdir(parents=True, exist_ok=True)
 
 COLORS = {
     "Human": "#4C78A8",
@@ -53,9 +54,9 @@ plt.rcParams.update(
 
 
 def load_data():
-    time = pd.read_csv(DATA / "experiment_1" / "experiment_1_time_manipulation_trials.csv")
-    effort = pd.read_csv(DATA / "experiment_1" / "experiment_1_effort_manipulation_trials.csv")
-    tsa = pd.read_csv(DATA / "experiment_2" / "experiment_2_reward_rate_batches.csv")
+    time = pd.read_csv(DATA / "experiment_1" / "time_trials.csv")
+    effort = pd.read_csv(DATA / "experiment_1" / "effort_trials.csv")
+    tsa = pd.read_csv(DATA / "experiment_2" / "batches.csv")
     time = time[time.groupby("subj_id")["subj_id"].transform("size").eq(16)].copy()
     effort = effort[effort.groupby("subj_id")["subj_id"].transform("size").eq(16)].copy()
     tsa = tsa[tsa.groupby("subj_id")["subj_id"].transform("size").eq(16)].copy()
@@ -324,7 +325,7 @@ def figure_2(time, effort, tsa):
         factory.append(trials)
     factory = pd.concat(factory, ignore_index=True)
     factory_observed = observed_summary(factory, ["version", "order", "block_position", "trial"], "select_robot")
-    factory_draws = pd.read_csv(RESULTS / "experiment_1" / "factory_trajectory_draws.csv.gz")
+    factory_draws = pd.read_csv(RESULTS / "experiment_1" / "choice_trajectories.csv.gz")
     factory_model = factory_draws.groupby(["version", "order", "block_position", "trial"], as_index=False).agg(
         mean=("p_choose_agent", "mean"),
         lower=("p_choose_agent", lambda x: x.quantile(0.025)),
@@ -335,7 +336,7 @@ def figure_2(time, effort, tsa):
     tsa["station"] = tsa["block_index"].map({1: "First station", 2: "Second station"})
     tsa["batch"] = tsa["batch_within_block"]
     tsa_observed = observed_summary(tsa, ["first_condition", "station", "batch"], "y")
-    tsa_draws = pd.read_csv(RESULTS / "experiment_2" / "tsa_trajectory_draws.csv.gz")
+    tsa_draws = pd.read_csv(RESULTS / "experiment_2" / "choice_trajectories.csv.gz")
     tsa_model = tsa_draws.groupby(["first_condition", "station", "batch"], as_index=False).agg(
         mean=("p_choose_agent", "mean"),
         lower=("p_choose_agent", lambda x: x.quantile(0.025)),
@@ -417,12 +418,12 @@ def latent_panel(ax, specs, x, xlabel, ylabel, legend_loc="center right"):
 
 
 def figure_3():
-    factory = pd.read_csv(RESULTS / "experiment_1" / "factory_belief_state_draws.csv.gz")
+    factory = pd.read_csv(RESULTS / "experiment_1" / "belief_trajectories.csv.gz")
     factory = factory[factory["block_position"].eq("First experienced condition")]
     factory_diff = option_difference(factory, ["version", "order", "cost", "draw", "trial"], "Human", "Robot")
     factory_summary = posterior_summary(factory_diff, ["version", "order", "cost", "trial"])
 
-    tsa = pd.read_csv(RESULTS / "experiment_2" / "tsa_belief_state_draws.csv.gz")
+    tsa = pd.read_csv(RESULTS / "experiment_2" / "belief_trajectories.csv.gz")
     tsa_diff = option_difference(tsa, ["first_condition", "station", "cost", "draw", "batch"], "AI", "Manual")
     tsa_reward = tsa_diff[tsa_diff["cost"].eq("Reward rate (correct/min)")]
     tsa_summary = posterior_summary(tsa_reward, ["first_condition", "station", "cost", "batch"])

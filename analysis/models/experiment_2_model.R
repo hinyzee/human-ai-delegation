@@ -8,11 +8,11 @@ args <- commandArgs(trailingOnly = FALSE)
 script <- normalizePath(sub("--file=", "", args[grep("--file=", args)]))
 model_dir <- dirname(script)
 repo <- normalizePath(file.path(model_dir, "..", ".."))
-out <- file.path(model_dir, "results", "experiment_2")
+out <- file.path(repo, "analysis", "results", "experiment_2")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 source(file.path(model_dir, "model_specifications.R"))
 
-data <- read.csv(file.path(repo, "data", "experiment_2", "experiment_2_reward_rate_batches.csv")) %>%
+data <- read.csv(file.path(repo, "data", "experiment_2", "batches.csv")) %>%
   arrange(subj_id, t) %>%
   group_by(subj_id) %>%
   filter(n() == 16) %>%
@@ -104,5 +104,5 @@ belief_states <- bind_rows(
 ) %>%
   mutate(model = "reward_rate_shared_beta0", cost = "Reward rate (correct/min)", .before = 1)
 
-write.csv(trajectory, gzfile(file.path(out, "tsa_trajectory_draws.csv.gz")), row.names = FALSE)
-write.csv(belief_states, gzfile(file.path(out, "tsa_belief_state_draws.csv.gz")), row.names = FALSE)
+write.csv(trajectory, gzfile(file.path(out, "choice_trajectories.csv.gz")), row.names = FALSE)
+write.csv(belief_states, gzfile(file.path(out, "belief_trajectories.csv.gz")), row.names = FALSE)

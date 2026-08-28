@@ -56,7 +56,6 @@ const CONFIG = {
 
   // Block 1 condition order for counterbalancing (block 2 is always full_suboptimal).
   conditionOrder: ['optimal', 'time_penalty', 'effort_penalty', 'full_suboptimal'],
-  experimentConditionOverride: 'optimal', // set null to restore normal condition randomization
 
   // === PATHS (relative to docs/) ===
   paths: {
@@ -99,6 +98,7 @@ const CONFIG = {
 
   // === DEBUG ===
   DEBUG_MODE: false,
+  debugForceCondition: null,
   debugSkipConsent: false,
   debugLogEvents: true,
 };

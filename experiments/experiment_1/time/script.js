@@ -94,7 +94,7 @@ let roundIndex = 0; // Start at 0 for practice round
 const totalRounds = 16;
 
 
-const blockSequence = [2, 1]; // Math.random() < 0.5 ? [1, 2] : [2, 1];
+const blockSequence = Math.random() < 0.5 ? [1, 2] : [2, 1];
 let currentBlock = blockSequence[0];
 const buttonOrderHumanFirst = Math.random() < 0.5;
 let hasSeenTutorial = false;
