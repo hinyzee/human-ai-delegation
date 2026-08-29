@@ -34,6 +34,7 @@ human-ai-delegation/
 │   │   ├── experiment_1/
 │   │   └── experiment_2/
 │   └── figures/
+│       ├── paper_figures.ipynb
 │       ├── paper_figures.py
 │       └── output/
 ├── .gitignore
@@ -64,7 +65,7 @@ Rscript analysis/models/experiment_2_model.R
 Rscript analysis/models/experiment_2_appendix.R  # optional supplementary comparison
 ```
 
-To generate the paper figures from the cleaned data and included posterior draws:
+To generate the paper figures from the cleaned data and included posterior draws, run the script below or execute `analysis/figures/paper_figures.ipynb`:
 
 ```bash
 python -m pip install -r requirements.txt

@@ -7,10 +7,13 @@ import seaborn as sns
 from scipy.stats import beta, t
 
 
-ROOT = Path(__file__).resolve().parents[2]
+FIGURE_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+if not (FIGURE_DIR / "paper_figures.py").exists():
+    FIGURE_DIR = FIGURE_DIR / "analysis" / "figures"
+ROOT = FIGURE_DIR.parents[1]
 DATA = ROOT / "data"
 RESULTS = ROOT / "analysis" / "results"
-OUT = Path(__file__).resolve().parent / "output"
+OUT = FIGURE_DIR / "output"
 OUT.mkdir(parents=True, exist_ok=True)
 
 COLORS = {
@@ -53,6 +56,7 @@ plt.rcParams.update(
 )
 
 
+# %%
 def load_data():
     time = pd.read_csv(DATA / "experiment_1" / "time_trials.csv")
     effort = pd.read_csv(DATA / "experiment_1" / "effort_trials.csv")
@@ -87,10 +91,11 @@ def rate_ci(values):
     )
 
 
+# %%
 def save(fig, stem):
     for extension in ("png", "pdf"):
         fig.savefig(OUT / f"{stem}.{extension}", bbox_inches="tight", facecolor="white")
-    plt.close(fig)
+    return fig
 
 
 def first_factory_block(data):
@@ -274,9 +279,10 @@ def figure_1(time, effort, tsa):
     ]
     legends[0].legend(handles=factory_handles, loc="center left", fontsize=6.8, handlelength=1.1)
     legends[1].legend(handles=tsa_handles, loc="center left", fontsize=6.8, handlelength=1.1)
-    save(fig, "figure_1_preference_shift")
+    return save(fig, "figure_1_preference_shift")
 
 
+# %%
 def observed_summary(data, groups, value):
     rows = []
     for keys, group in data.groupby(groups, sort=False):
@@ -384,9 +390,10 @@ def figure_2(time, effort, tsa):
     tsa_figure.text(0, 1, "B", fontsize=11, fontweight="bold", va="top")
     handles, labels = factory_axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, frameon=False, loc="outside lower center", ncol=2)
-    save(fig, "figure_2_delegation_trajectories")
+    return save(fig, "figure_2_delegation_trajectories")
 
 
+# %%
 def posterior_summary(data, groups):
     return data.groupby(groups, as_index=False).agg(
         median=("difference", "median"),
@@ -454,11 +461,26 @@ def figure_3():
     axes[2].set_ylim(-15, axes[2].get_ylim()[1])
     for ax in axes:
         ax.tick_params(axis="both", labelsize=7.5)
-    save(fig, "figure_3_latent_belief_trajectories")
+    return save(fig, "figure_3_latent_belief_trajectories")
+
+
+# %%
+def generate_figures(show=True):
+    experiment_1_time, experiment_1_effort, experiment_2 = load_data()
+    figures = [
+        figure_1(experiment_1_time, experiment_1_effort, experiment_2),
+        figure_2(experiment_1_time, experiment_1_effort, experiment_2),
+        figure_3(),
+    ]
+    if show:
+        plt.show()
+    else:
+        for figure in figures:
+            plt.close(figure)
+    return figures
 
 
 if __name__ == "__main__":
-    experiment_1_time, experiment_1_effort, experiment_2 = load_data()
-    figure_1(experiment_1_time, experiment_1_effort, experiment_2)
-    figure_2(experiment_1_time, experiment_1_effort, experiment_2)
-    figure_3()
+    generate_figures(show=False)
+    for path in sorted(OUT.glob("figure_*")):
+        print(path.relative_to(ROOT))
