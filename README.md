@@ -2,7 +2,7 @@
 
 Code, data, and experimental materials for **“How Time and Effort Shape Decisions to Delegate to AI”**
 
-This project examines how people decide whether to complete work themselves or delegate it to an automated agent. Across two behavioral experiments, we manipulate the time and effort associated with the two options and examine how delegation choices change with experience. The repository contains the browser experiments, cleaned analysis data, Bayesian models, posterior draws, and code used to generate the paper figures.
+This project examines how people decide whether to complete work themselves or delegate it to an automated agent. In both behavioral experiments, we manipulate the time and effort associated with the two options and examine how delegation choices change with experience. The repository contains the browser experiments, cleaned analysis data, Bayesian models, posterior draws, and code used to generate the paper figures.
 
 ## Experiments
 
