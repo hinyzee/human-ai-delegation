@@ -1,0 +1,5 @@
+block_condition,condition,participants,ai_batches,mean_boxes_checked,sd_boxes_checked,se_boxes_checked,ci_95_lower,ci_95_upper
+optimal,Fast/easy AI,25,144,6.0926,2.4543,0.4909,5.0795,7.1056
+time_penalty,Slow/easy AI,24,75,6.2882,3.121,0.6371,4.9703,7.6061
+effort_penalty,Fast/hard AI,25,89,12.4839,7.4281,1.4856,9.4177,15.5501
+full_suboptimal,Slow/hard AI,24,77,16.7006,7.998,1.6326,13.3234,20.0779

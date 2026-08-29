@@ -33,6 +33,12 @@ CONDITION_COLORS = {
     "Slow/hard AI (first)": "#E7298A",
     "Slow/hard AI (second)": "#666666",
 }
+EXPERIMENT_2_CONDITIONS = {
+    "optimal": "Fast/easy AI",
+    "time_penalty": "Slow/easy AI",
+    "effort_penalty": "Fast/hard AI",
+    "full_suboptimal": "Slow/hard AI",
+}
 
 sns.set_theme(context="paper", style="whitegrid")
 plt.rcParams.update(
@@ -60,7 +66,7 @@ plt.rcParams.update(
 def load_data():
     time = pd.read_csv(DATA / "experiment_1" / "time_trials.csv")
     effort = pd.read_csv(DATA / "experiment_1" / "effort_trials.csv")
-    tsa = pd.read_csv(DATA / "experiment_2" / "batches.csv")
+    tsa = pd.read_csv(DATA / "experiment_2" / "exp_2_by_trial.csv")
     time = time[time.groupby("subj_id")["subj_id"].transform("size").eq(16)].copy()
     effort = effort[effort.groupby("subj_id")["subj_id"].transform("size").eq(16)].copy()
     tsa = tsa[tsa.groupby("subj_id")["subj_id"].transform("size").eq(16)].copy()
@@ -89,6 +95,48 @@ def rate_ci(values):
         beta.ppf(0.025, chosen + 0.5, n - chosen + 0.5),
         beta.ppf(0.975, chosen + 0.5, n - chosen + 0.5),
     )
+
+
+def experiment_2_effort_summary(data):
+    ai_batches = data.loc[
+        data["block_index"].eq(1)
+        & data["mode"].eq("ai")
+        & data["snippets_hovered_count"].notna(),
+        ["subj_id", "block_condition", "snippets_hovered_count"],
+    ]
+
+    participant_means = ai_batches.groupby(
+        ["block_condition", "subj_id"], as_index=False
+    ).agg(participant_mean=("snippets_hovered_count", "mean"))
+
+    summary = participant_means.groupby("block_condition", as_index=False).agg(
+        participants=("subj_id", "nunique"),
+        mean_boxes_checked=("participant_mean", "mean"),
+        sd_boxes_checked=("participant_mean", "std"),
+    )
+    batch_counts = ai_batches.groupby("block_condition").size().rename("ai_batches")
+    summary = summary.merge(batch_counts, on="block_condition")
+    summary["se_boxes_checked"] = summary["sd_boxes_checked"] / np.sqrt(summary["participants"])
+    critical = t.ppf(0.975, summary["participants"] - 1)
+    margin = critical * summary["se_boxes_checked"]
+    summary["ci_95_lower"] = summary["mean_boxes_checked"] - margin
+    summary["ci_95_upper"] = summary["mean_boxes_checked"] + margin
+    summary["condition"] = summary["block_condition"].map(EXPERIMENT_2_CONDITIONS)
+    order = {condition: index for index, condition in enumerate(EXPERIMENT_2_CONDITIONS)}
+    summary["condition_order"] = summary["block_condition"].map(order)
+
+    columns = [
+        "block_condition",
+        "condition",
+        "participants",
+        "ai_batches",
+        "mean_boxes_checked",
+        "sd_boxes_checked",
+        "se_boxes_checked",
+        "ci_95_lower",
+        "ci_95_upper",
+    ]
+    return summary.sort_values("condition_order")[columns].round(4)
 
 
 # %%
@@ -467,6 +515,9 @@ def figure_3():
 # %%
 def generate_figures(show=True):
     experiment_1_time, experiment_1_effort, experiment_2 = load_data()
+    experiment_2_effort_summary(experiment_2).to_csv(
+        OUT / "table_1_experiment_2_effort.csv", index=False
+    )
     figures = [
         figure_1(experiment_1_time, experiment_1_effort, experiment_2),
         figure_2(experiment_1_time, experiment_1_effort, experiment_2),
@@ -482,5 +533,5 @@ def generate_figures(show=True):
 
 if __name__ == "__main__":
     generate_figures(show=False)
-    for path in sorted(OUT.glob("figure_*")):
+    for path in sorted(path for path in OUT.iterdir() if path.is_file()):
         print(path.relative_to(ROOT))
