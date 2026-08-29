@@ -115,6 +115,6 @@ The included posterior draws can be used to reproduce the figures without refitt
 
 ## Running the experiments
 
-The folders under `experiments/` contain the HTML, CSS, JavaScript, assets, and stimuli needed to run the behavioral tasks locally.
+The folders under `experiments/` contain the code and stimuli needed to run the behavioral tasks locally.
 
 The original data-collection backend is not included. The browser experiments can therefore be run for demonstration, but participant responses are not saved unless a storage backend is connected.
