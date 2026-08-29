@@ -1,0 +1,9 @@
+experiment,condition,n,time_with_ai_mean,time_with_ai_sd,time_no_ai_mean,time_no_ai_sd,effort_with_ai_mean,effort_with_ai_sd,effort_no_ai_mean,effort_no_ai_sd
+Experiment 1,AI faster,43,23.7934,4.7534,43.6056,3.9511,6.0,,12.0,
+Experiment 1,Human faster,43,50.0655,8.2808,17.985,2.8675,6.0,,12.0,
+Experiment 1,AI easier,45,31.6425,4.4792,32.4777,3.4395,2.0,,12.0,
+Experiment 1,Human easier,45,39.7087,8.3061,37.6592,5.6007,6.0,,4.0,
+Experiment 2,Fast/easy AI,26,37.5903,14.8528,27.9372,15.1061,6.0926,2.4543,,
+Experiment 2,Slow/easy AI,25,74.4278,17.2007,24.4859,6.3882,6.2882,3.121,,
+Experiment 2,Fast/hard AI,26,38.5722,12.8815,22.2977,6.3038,12.4839,7.4281,,
+Experiment 2,Slow/hard AI,25,88.941,20.3633,33.0058,19.6321,16.7006,7.998,,

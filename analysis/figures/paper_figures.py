@@ -33,6 +33,14 @@ CONDITION_COLORS = {
     "Slow/hard AI (first)": "#E7298A",
     "Slow/hard AI (second)": "#666666",
 }
+EXPERIMENT_1_TIME_CONDITIONS = {
+    1: "AI faster",
+    2: "Human faster",
+}
+EXPERIMENT_1_EFFORT_CONDITIONS = {
+    2: "AI easier",
+    1: "Human easier",
+}
 EXPERIMENT_2_CONDITIONS = {
     "optimal": "Fast/easy AI",
     "time_penalty": "Slow/easy AI",
@@ -97,46 +105,93 @@ def rate_ci(values):
     )
 
 
-def experiment_2_effort_summary(data):
-    ai_batches = data.loc[
-        data["block_index"].eq(1)
-        & data["mode"].eq("ai")
-        & data["snippets_hovered_count"].notna(),
-        ["subj_id", "block_condition", "snippets_hovered_count"],
-    ]
+def participant_mode_stats(data, value):
+    participant_means = data.groupby(
+        ["condition", "mode", "subj_id"], as_index=False
+    ).agg(value=(value, "mean"))
+    return participant_means.groupby(["condition", "mode"])["value"].agg(["mean", "std"])
 
-    participant_means = ai_batches.groupby(
-        ["block_condition", "subj_id"], as_index=False
-    ).agg(participant_mean=("snippets_hovered_count", "mean"))
 
-    summary = participant_means.groupby("block_condition", as_index=False).agg(
-        participants=("subj_id", "nunique"),
-        mean_boxes_checked=("participant_mean", "mean"),
-        sd_boxes_checked=("participant_mean", "std"),
+def experiment_1_table_rows(data, condition_labels):
+    trials = data.assign(
+        condition=data["block"].map(condition_labels),
+        mode=np.where(data["select_robot"].eq(1), "with_ai", "no_ai"),
+        time_s=data["round_total_time_ms"] / 1000,
     )
-    batch_counts = ai_batches.groupby("block_condition").size().rename("ai_batches")
-    summary = summary.merge(batch_counts, on="block_condition")
-    summary["se_boxes_checked"] = summary["sd_boxes_checked"] / np.sqrt(summary["participants"])
-    critical = t.ppf(0.975, summary["participants"] - 1)
-    margin = critical * summary["se_boxes_checked"]
-    summary["ci_95_lower"] = summary["mean_boxes_checked"] - margin
-    summary["ci_95_upper"] = summary["mean_boxes_checked"] + margin
-    summary["condition"] = summary["block_condition"].map(EXPERIMENT_2_CONDITIONS)
-    order = {condition: index for index, condition in enumerate(EXPERIMENT_2_CONDITIONS)}
-    summary["condition_order"] = summary["block_condition"].map(order)
+    time = participant_mode_stats(trials, "time_s")
+    effort = participant_mode_stats(trials, "round_total_effort")
+    n = trials["subj_id"].nunique()
 
-    columns = [
-        "block_condition",
-        "condition",
-        "participants",
-        "ai_batches",
-        "mean_boxes_checked",
-        "sd_boxes_checked",
-        "se_boxes_checked",
-        "ci_95_lower",
-        "ci_95_upper",
+    rows = []
+    for condition in condition_labels.values():
+        rows.append(
+            {
+                "experiment": "Experiment 1",
+                "condition": condition,
+                "n": n,
+                "time_with_ai_mean": time.loc[(condition, "with_ai"), "mean"],
+                "time_with_ai_sd": time.loc[(condition, "with_ai"), "std"],
+                "time_no_ai_mean": time.loc[(condition, "no_ai"), "mean"],
+                "time_no_ai_sd": time.loc[(condition, "no_ai"), "std"],
+                "effort_with_ai_mean": effort.loc[(condition, "with_ai"), "mean"],
+                "effort_with_ai_sd": np.nan,
+                "effort_no_ai_mean": effort.loc[(condition, "no_ai"), "mean"],
+                "effort_no_ai_sd": np.nan,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def experiment_2_table_rows(data):
+    first_block = data.loc[data["block_index"].eq(1)].assign(
+        condition=data["first_condition"].map(EXPERIMENT_2_CONDITIONS),
+        mode=data["mode"].replace({"ai": "with_ai", "manual": "no_ai"}),
+    )
+    assigned_n = first_block.groupby("condition")["subj_id"].nunique()
+
+    time_data = first_block.loc[
+        ~(first_block["idle_batch"] & first_block["mode"].eq("with_ai"))
     ]
-    return summary.sort_values("condition_order")[columns].round(4)
+    time = participant_mode_stats(time_data, "batch_time_sec")
+
+    effort_data = first_block.loc[
+        first_block["mode"].eq("with_ai")
+        & first_block["snippets_hovered_count"].notna()
+    ]
+    effort = participant_mode_stats(effort_data, "snippets_hovered_count")
+
+    rows = []
+    for condition in EXPERIMENT_2_CONDITIONS.values():
+        rows.append(
+            {
+                "experiment": "Experiment 2",
+                "condition": condition,
+                "n": assigned_n.loc[condition],
+                "time_with_ai_mean": time.loc[(condition, "with_ai"), "mean"],
+                "time_with_ai_sd": time.loc[(condition, "with_ai"), "std"],
+                "time_no_ai_mean": time.loc[(condition, "no_ai"), "mean"],
+                "time_no_ai_sd": time.loc[(condition, "no_ai"), "std"],
+                "effort_with_ai_mean": effort.loc[(condition, "with_ai"), "mean"],
+                "effort_with_ai_sd": effort.loc[(condition, "with_ai"), "std"],
+                "effort_no_ai_mean": np.nan,
+                "effort_no_ai_sd": np.nan,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def build_table_1(experiment_1_time, experiment_1_effort, experiment_2):
+    table = pd.concat(
+        [
+            experiment_1_table_rows(experiment_1_time, EXPERIMENT_1_TIME_CONDITIONS),
+            experiment_1_table_rows(experiment_1_effort, EXPERIMENT_1_EFFORT_CONDITIONS),
+            experiment_2_table_rows(experiment_2),
+        ],
+        ignore_index=True,
+    )
+    numeric_columns = table.columns.difference(["experiment", "condition", "n"])
+    table[numeric_columns] = table[numeric_columns].round(4)
+    return table
 
 
 # %%
@@ -515,8 +570,8 @@ def figure_3():
 # %%
 def generate_figures(show=True):
     experiment_1_time, experiment_1_effort, experiment_2 = load_data()
-    experiment_2_effort_summary(experiment_2).to_csv(
-        OUT / "table_1_experiment_2_effort.csv", index=False
+    build_table_1(experiment_1_time, experiment_1_effort, experiment_2).to_csv(
+        OUT / "table_1.csv", index=False
     )
     figures = [
         figure_1(experiment_1_time, experiment_1_effort, experiment_2),
