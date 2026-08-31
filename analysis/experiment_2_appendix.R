@@ -6,12 +6,12 @@ suppressPackageStartupMessages({
 args <- commandArgs(trailingOnly = FALSE)
 script <- normalizePath(sub("--file=", "", args[grep("--file=", args)]))
 model_dir <- dirname(script)
-repo <- normalizePath(file.path(model_dir, "..", ".."))
-out <- file.path(repo, "analysis", "results", "experiment_2")
+repo <- normalizePath(file.path(model_dir, ".."))
+out <- file.path(repo, "outputs", "model_results", "experiment_2")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 source(file.path(model_dir, "model_specifications.R"))
 
-data <- read.csv(file.path(repo, "data", "experiment_2", "batches.csv")) %>%
+data <- read.csv(file.path(repo, "data", "experiment_2", "exp_2_by_trial.csv")) %>%
   mutate(
     t = as.integer(t),
     y = as.integer(y),

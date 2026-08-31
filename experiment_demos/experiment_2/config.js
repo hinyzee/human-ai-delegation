@@ -57,7 +57,7 @@ const CONFIG = {
   // Block 1 condition order for counterbalancing (block 2 is always full_suboptimal).
   conditionOrder: ['optimal', 'time_penalty', 'effort_penalty', 'full_suboptimal'],
 
-  // === PATHS (relative to docs/) ===
+  // === PATHS (relative to this demo directory) ===
   paths: {
     folderManifest: './stimuli/folder_manifest.json',
     targetPresent: './stimuli/target_present/',

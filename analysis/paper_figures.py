@@ -7,13 +7,11 @@ import seaborn as sns
 from scipy.stats import beta, t
 
 
-FIGURE_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
-if not (FIGURE_DIR / "paper_figures.py").exists():
-    FIGURE_DIR = FIGURE_DIR / "analysis" / "figures"
-ROOT = FIGURE_DIR.parents[1]
+ANALYSIS_DIR = Path(__file__).resolve().parent
+ROOT = ANALYSIS_DIR.parent
 DATA = ROOT / "data"
-RESULTS = ROOT / "analysis" / "results"
-OUT = FIGURE_DIR / "output"
+RESULTS = ROOT / "outputs" / "model_results"
+OUT = ROOT / "outputs" / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 
 COLORS = {

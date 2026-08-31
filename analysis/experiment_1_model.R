@@ -7,8 +7,8 @@ suppressPackageStartupMessages({
 args <- commandArgs(trailingOnly = FALSE)
 script <- normalizePath(sub("--file=", "", args[grep("--file=", args)]))
 model_dir <- dirname(script)
-repo <- normalizePath(file.path(model_dir, "..", ".."))
-out <- file.path(repo, "analysis", "results", "experiment_1")
+repo <- normalizePath(file.path(model_dir, ".."))
+out <- file.path(repo, "outputs", "model_results", "experiment_1")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 source(file.path(model_dir, "model_specifications.R"))
 

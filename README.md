@@ -1,15 +1,18 @@
-# Human–AI Delegation
+# How Time and Effort Shape Decisions to Delegate to AI
 
-Code, data, and experimental materials for **“How Time and Effort Shape Decisions to Delegate to AI.”**
+This repository contains the browser demos, cleaned data, analysis code, model outputs, and figures for the paper **“How Time and Effort Shape Decisions to Delegate to AI.”** The project examines how experienced costs shape decisions to complete work manually or delegate it to AI.
 
-This project examines how people decide whether to complete work themselves or delegate it to AI. Across two behavioral experiments, we manipulate differences in time and effort between the unassisted and AI-assisted workflows and examine how delegation choices change with experience.
+## Experiments
 
+Experiment 1 uses a package-delivery task. Its two versions separately manipulate the relative effort and completion time of manual and robot-assisted work.
+
+Experiment 2 uses a baggage-screening task. It varies AI processing time and the review effort required after AI assistance, creating different trade-offs between manual and AI-assisted work.
 
 ## Repository structure
 
 ```text
 human-ai-delegation/
-├── experiments/
+├── experiment_demos/
 │   ├── experiment_1/
 │   │   ├── effort/
 │   │   └── time/
@@ -19,102 +22,50 @@ human-ai-delegation/
 │   ├── experiment_1/
 │   └── experiment_2/
 ├── analysis/
-│   ├── models/
-│   ├── results/
+│   ├── model_specifications.R
+│   ├── experiment_1_model.R
+│   ├── experiment_2_model.R
+│   ├── experiment_2_appendix.R
+│   └── paper_figures.py
+├── outputs/
+│   ├── model_results/
 │   │   ├── experiment_1/
 │   │   └── experiment_2/
 │   └── figures/
-│       └── output/
 ├── README.md
+├── LICENSE
 ├── requirements.txt
 └── renv.lock
 ```
 
-## Experiments
+- `experiment_demos/` contains the browser tasks and the stimuli used by Experiment 2.
+- `data/` contains cleaned, analysis-ready trial data for both experiments. Raw browser event logs are not included.
+- `analysis/` contains the JAGS model definitions, R model-fitting scripts, appendix analyses, and Python figure code.
+- `outputs/` contains model-derived posterior summaries and generated paper figures.
 
-### Experiment 1
+The included posterior draws are sufficient to reproduce the model-based figures without refitting the JAGS models.
 
-Experiment 1 uses a package-delivery task in which participants repeatedly choose whether to complete a task themselves or delegate it to a robot assistant.
+## Prerequisites
 
-Two versions of the experiment manipulate the relative costs of the two options. One varies completion time while holding effort approximately constant, and the other varies effort while holding completion time approximately constant.
+- R and JAGS, with the `R2jags` package available. The R package environment is recorded in `renv.lock` and can be restored with `renv::restore()`.
+- Python 3. Python dependencies are listed in `requirements.txt` and can be installed with `python3 -m pip install -r requirements.txt`.
 
-The browser implementations are in `experiments/experiment_1/`.
+## Reproducing the figures
 
-### Experiment 2
+From the repository root, run:
 
-Experiment 2 uses a baggage-screening task in which participants repeatedly choose between an unassisted workflow and an AI-assisted workflow.
-
-The AI-assisted workflow varies in processing time and the amount of review required after the AI returns its output. These manipulations create different time and effort trade-offs between the two workflows.
-
-The browser implementation and X-ray stimuli are in `experiments/experiment_2/`.
-
-## Data
-
-`data/` contains the cleaned, analysis-ready datasets used in the paper. Raw browser event logs are not included.
-
-Experiment 1 data are organized at the trial level and contain participants' delegation choices and the time and effort experienced during each trial.
-
-Experiment 2 data are also organized at the trial level and contain participants' delegation choices, task outcomes, completion time, effort, accuracy, and reward rate.
-
-## Computational models
-
-The modeling code is in `analysis/models/` and is implemented in R and JAGS.
-
-```text
-analysis/models/
-├── model_specifications.R
-├── experiment_1_model.R
-├── experiment_2_model.R
-└── experiment_2_appendix.R
+```bash
+python3 analysis/paper_figures.py
 ```
 
-`model_specifications.R` contains the JAGS model definitions.
+Figures and the generated summary table are written to `outputs/figures/`. To refit the models, run the R scripts in `analysis/`; their results are written to `outputs/model_results/`.
 
-`experiment_1_model.R` fits the model for Experiment 1. The model learns from experienced time and effort and estimates how these quantities influence subsequent delegation choices.
+## Running the demos
 
-`experiment_2_model.R` fits the model for Experiment 2 using experienced reward rate.
+Serve the repository with a local web server, then open the relevant HTML file under `experiment_demos/`. For example:
 
-`experiment_2_appendix.R` compares alternative model specifications based on accuracy, time, effort, and reward rate.
-
-## Model results
-
-Posterior draws used to generate the paper figures are included in `analysis/results/`.
-
-```text
-analysis/results/
-├── experiment_1/
-│   ├── choice_trajectories.csv.gz
-│   └── belief_trajectories.csv.gz
-└── experiment_2/
-    ├── choice_trajectories.csv.gz
-    └── belief_trajectories.csv.gz
+```bash
+python3 -m http.server 8000
 ```
 
-These files allow the model-based figures to be reproduced without refitting the JAGS models.
-
-## Figures
-
-`analysis/figures/paper_figures.py` generates the main figures from the cleaned behavioral data and posterior model estimates.
-
-Generated figures are saved in `analysis/figures/output/`.
-
-## Reproducing the analyses
-
-The R package environment is recorded in `renv.lock`. The models require R, JAGS, and `R2jags`.
-
-Python dependencies for figure generation are listed in `requirements.txt`.
-
-To reproduce the full analysis:
-
-1. Restore the R environment.
-2. Run `experiment_1_model.R` and `experiment_2_model.R`.
-3. Run `experiment_2_appendix.R` for the model-comparison analyses.
-4. Run `analysis/figures/paper_figures.py` to generate the figures.
-
-The included posterior draws can be used to reproduce the figures without refitting the models.
-
-## Running the experiments
-
-The folders under `experiments/` contain the code and stimuli needed to run the behavioral tasks locally.
-
-The original data-collection backend is not included. The browser experiments can therefore be run for demonstration, but participant responses are not saved unless a storage backend is connected.
+The demos reproduce the browser tasks but do not include the original data-collection backend. Responses are not saved.
