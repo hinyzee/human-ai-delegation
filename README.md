@@ -1,6 +1,7 @@
 # How Time and Effort Shape Decisions to Delegate to AI
 
-This repository contains the browser demos, cleaned data, analysis code, model outputs, and figures for the paper **“How Time and Effort Shape Decisions to Delegate to AI.”** The project examines how experienced costs shape decisions to complete work manually or delegate it to AI.
+This repository contains the browser demos, cleaned data, analysis code, model outputs, and figures for the paper **“How Time and Effort Shape Decisions to Delegate to AI.”** The paper examines how differences in time and effort between performing a task without AI and assigning it to AI shape delegation choices, and how these choices change with repeated experience.
+
 
 ## Experiments
 
