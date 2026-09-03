@@ -317,7 +317,7 @@ def figure_1(time, effort, tsa):
     }
     fig = plt.figure(figsize=(4.2, 4.9), constrained_layout=True)
     outer = fig.add_gridspec(4, 1, height_ratios=[0.16, 1, 0.16, 1], hspace=0.02)
-    for cell, label in ((outer[0], "A  Experiment 1"), (outer[2], "B  Experiment 2")):
+    for cell, label in ((outer[0], "a  Experiment 1"), (outer[2], "b  Experiment 2")):
         label_ax = fig.add_subplot(cell)
         label_ax.axis("off")
         label_ax.text(0, 0.5, label, fontsize=10, fontweight="bold", va="center")
@@ -380,7 +380,7 @@ def figure_1(time, effort, tsa):
     ]
     legends[0].legend(handles=factory_handles, loc="center left", fontsize=6.8, handlelength=1.1)
     legends[1].legend(handles=tsa_handles, loc="center left", fontsize=6.8, handlelength=1.1)
-    return save(fig, "figure_1_preference_shift")
+    return save(fig, "fig1_preference_shift")
 
 
 # %%
@@ -485,13 +485,13 @@ def figure_2(time, effort, tsa):
             tsa_axes[row, column].set_title(tsa_titles[condition] if column == 0 else "Slow/hard AI", fontsize=8, pad=7)
     factory_figure.suptitle("Experiment 1 trajectories\n\n", fontsize=9.5)
     factory_figure.supxlabel("Trial within condition", fontsize=8.5)
-    factory_figure.text(0, 1, "A", fontsize=11, fontweight="bold", va="top")
+    factory_figure.text(0, 1, "a", fontsize=11, fontweight="bold", va="top")
     tsa_figure.suptitle("Experiment 2 trajectories\n\n", fontsize=9.5)
     tsa_figure.supxlabel("Batch within station", fontsize=8.5)
-    tsa_figure.text(0, 1, "B", fontsize=11, fontweight="bold", va="top")
+    tsa_figure.text(0, 1, "b", fontsize=11, fontweight="bold", va="top")
     handles, labels = factory_axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, frameon=False, loc="outside lower center", ncol=2)
-    return save(fig, "figure_2_delegation_trajectories")
+    return save(fig, "fig2_delegation_trajectories")
 
 
 # %%
@@ -554,15 +554,15 @@ def figure_3():
     tsa_specs.append(("Slow/hard AI (second)", second_summary))
 
     fig, axes = plt.subplots(1, 3, figsize=(8.9, 2.75), constrained_layout=True)
-    axes[0].text(-0.16, 1.10, "A", transform=axes[0].transAxes, fontsize=10, fontweight="bold")
-    axes[2].text(-0.16, 1.10, "B", transform=axes[2].transAxes, fontsize=10, fontweight="bold")
+    axes[0].text(-0.16, 1.10, "a", transform=axes[0].transAxes, fontsize=10, fontweight="bold")
+    axes[2].text(-0.16, 1.10, "b", transform=axes[2].transAxes, fontsize=10, fontweight="bold")
     latent_panel(axes[0], time_specs, "trial", "Trial", "Expected time difference (s)")
     latent_panel(axes[1], effort_specs, "trial", "Trial", "Expected effort difference (clicks)")
     latent_panel(axes[2], tsa_specs, "batch", "Batch", "Expected difference in reward rate", "lower center")
     axes[2].set_ylim(-15, axes[2].get_ylim()[1])
     for ax in axes:
         ax.tick_params(axis="both", labelsize=7.5)
-    return save(fig, "figure_3_latent_belief_trajectories")
+    return save(fig, "fig3_latent_belief_trajectories")
 
 
 # %%
